@@ -1,0 +1,58 @@
+Email: We can send emails using Python using it's SMTP library.
+Using the following syntax:
+#Python code For sending emails
+import smtplib
+# creates SMTP session
+s = smtplib.SMTP('smtp.gmail.com', 587)
+# start TLS for security
+s.starttls()
+# Authentication
+s.login("projectbuildersrinjoysur@gmail.com", "Access Key of email")
+# message to be sent
+message = "Hello There"
+# sending the mail
+s.sendmail("projectbuildersrinjoysur@gmail.com", "srinjoysur@gmail.com", message)
+# terminating the session
+s.quit()
+2.WhatsApp: We can invoke whatsapp messages using pywhatkit library.
+Using the following syntax:
+import pywhatkit
+pywhatkit.sendwhatmsg("+919830948262","Hello! This is a message from python",16, 50)
+3. SMS: We can invoke sms using multiple libraries like Twilio and Sinch.
+It's syntax is:
+# python script for sending message update
+
+import time
+from time import sleep
+from sinchsms import SinchSMS
+
+# function for sending SMS
+def sendSMS():
+
+# enter all the details
+# get app_key and app_secret by registering
+# a app on sinchSMS
+number = '+917980696314'
+app_key = 'your_app_key'
+app_secret = 'your_app_secret'
+
+# enter the message to be sent
+message = 'Hello Message!!!'
+
+client = SinchSMS(app_key, app_secret)
+print("Sending '%s' to %s" % (message, number))
+
+response = client.send_message(number, message)
+message_id = response['messageId']
+response = client.check_status(message_id)
+
+# keep trying unless the status returned is Successful
+while response['status'] != 'Successful':
+print(response['status'])
+time.sleep(1)
+response = client.check_status(message_id)
+
+print(response['status'])
+
+if __name__ == "__main__":
+sendSMS()
